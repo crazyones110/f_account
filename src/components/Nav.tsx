@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { ReactComponent as Icon1 } from '../icons/tag.svg'
 import { ReactComponent as Icon2 } from '../icons/money.svg'
 import { ReactComponent as Icon3 } from 'icons/statistic.svg'
 const NavWrapper = styled.nav`
-  border: 1px solid blue;
-  /* line-height: 24px; */
+  background-color: #fff;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   > ul {
     display: flex;
@@ -18,6 +17,12 @@ const NavWrapper = styled.nav`
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        &.selected {
+          color: red;
+          svg path {
+            fill: red;
+          }
+        }
       }
     }
   }
@@ -49,22 +54,22 @@ export const Nav: React.FC = () => {
     <NavWrapper>
       <ul>
         <li>
-          <Link to="/tags">
+          <NavLink to="/tags" activeClassName="selected">
             <TagIcon />
-            标签页
-          </Link>
+            标签
+          </NavLink>
         </li>
         <li>
-          <Link to="/money">
+          <NavLink to="/money" activeClassName="selected">
             <MoneyIcon />
-            记账页
-          </Link>
+            记账
+          </NavLink>
         </li>
         <li>
-          <Link to="/statistics">
+          <NavLink to="/statistics" activeClassName="selected">
             <StatisticsIcon />
-            统计页
-          </Link>
+            统计
+          </NavLink>
         </li>
       </ul>
     </NavWrapper>
