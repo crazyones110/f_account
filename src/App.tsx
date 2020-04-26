@@ -3,39 +3,19 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from 'react-router-dom'
 import styled from 'styled-components'
-
-const Wrapper = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-`
-const Main = styled.div`
-  flex-grow: 1;
-  overflow: auto;
-`
-const Nav = styled.nav`
-  border: 1px solid blue;
-  > ul {
-    display: flex;
-    > li {
-      width: 33.3333%;
-      text-align: center;
-      padding: 16px;
-    }
-  }
-`
+import { Tags } from 'views/Tags'
+import { Money } from 'views/Money'
+import { Statistics } from 'views/Statistics'
+import { NoMatch } from 'views/NoMatch'
 
 export default function App() {
   return (
     <Router>
-      <Wrapper>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Main>
           <Switch>
             <Route path="/tags">
               <Tags />
@@ -51,36 +31,7 @@ export default function App() {
               <NoMatch />
             </Route>
           </Switch>
-        </Main>
-        <Nav>
-          <ul>
-            <li>
-              <Link to="/tags">标签页</Link>
-            </li>
-            <li>
-              <Link to="/money">记账页</Link>
-            </li>
-            <li>
-              <Link to="/statistics">统计页</Link>
-            </li>
-          </ul>
-        </Nav>
-      </Wrapper>
+        {/* <Nav/> */}
     </Router>
   )
-}
-
-function Tags() {
-  return <h2>标签页</h2>
-}
-function Money() {
-  return <h2>记账页</h2>
-}
-
-function Statistics() {
-  return <h2>统计页</h2>
-}
-
-function NoMatch() {
-  return <div>404</div>
 }
