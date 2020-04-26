@@ -11,11 +11,15 @@ const Main = styled.div`
   flex-grow: 1;
   overflow: auto;
 `
+interface LayoutProps {
+  children: React.ReactNode,
+  className?: string
+}
 
-export const Layout: React.FC = (props) => {
+export const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <Wrapper>
-      <Main>
+      <Main className={props.className}>
         {props.children}
       </Main>
       <Nav />
