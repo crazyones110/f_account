@@ -5,7 +5,6 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
-import styled from 'styled-components'
 import { Tags } from 'views/Tags'
 import { Money } from 'views/Money'
 import { Statistics } from 'views/Statistics'
