@@ -39,7 +39,7 @@ interface Props {
   onChange(selected: string[]): void
 }
 export const TagsSection: React.FC<Props> = ({value, onChange}) => {
-  const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行'])
+  const {tags, setTags} = useTags()
   // const [selectedTags, setSelectedTags] = useState<string[]>([])
   const selectedTags = value
   const onAddTag = () => {

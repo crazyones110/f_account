@@ -19,6 +19,19 @@ export function Money() {
     category: '-' as Category,
     amount: 0,
   })
+  // const onChange = (key, value) => {
+  //   setSelected({
+  //     ...selected,
+  //     key: value
+  //   })
+  // }
+  // TODO 下面的onChange记得重构
+  const onChange = (obj: Partial<typeof selected>) => {
+    setSelected({
+      ...selected,
+      ...obj
+    })
+  }
   return (
     <MoneyLayout className="hi">
       {selected.tags} <br/>
