@@ -5,6 +5,7 @@ import { Money } from 'views/Money'
 import { Statistics } from 'views/Statistics'
 import { NoMatch } from 'views/NoMatch'
 import styled from 'styled-components'
+import { EditTag } from 'views/EditTag'
 
 const AppWrapper = styled.div`
   color: #333;
@@ -17,13 +18,16 @@ export default function App() {
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/tags">
+          <Route exact path="/tags">
             <Tags />
           </Route>
-          <Route path="/money">
+          <Route exact path="/tags/:tag">
+            <EditTag/>
+          </Route>
+          <Route exact path="/money">
             <Money />
           </Route>
-          <Route path="/statistics">
+          <Route exact path="/statistics">
             <Statistics />
           </Route>
           <Redirect exact from="/" to="/money" />

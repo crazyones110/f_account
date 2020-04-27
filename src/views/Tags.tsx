@@ -3,6 +3,7 @@ import React from 'react'
 import { useTags } from './useTags'
 import styled from 'styled-components'
 import { ReactComponent as Right } from 'icons/right.svg'
+import { Link } from 'react-router-dom'
 
 const RightIcon = styled(Right)`
   width: 1em;
@@ -16,10 +17,12 @@ const TagList = styled.ul`
   > li {
     /* #e5e5e5 */
     border-bottom: 1px solid #d5d5d9;
-    padding: 12px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    > a {
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
   }
 `
 const AddTagButton = styled.button`
@@ -43,8 +46,10 @@ export function Tags() {
       <TagList>
         {tags.map(tag => (
           <li key={tag}>
-            <span className="oneLine">{tag}</span>
-            <RightIcon />
+            <Link to={'/tags/' + tag}>
+              <span className="oneLine">{tag}</span>
+              <RightIcon />
+            </Link>
           </li>
         ))}
       </TagList>
