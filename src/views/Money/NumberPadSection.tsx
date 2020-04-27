@@ -60,13 +60,21 @@ const StyledNumberPadSection = styled.section`
   }
 `
 
-export const NumberPadSection: React.FC = props => {
-  const [output, _setOutput] = useState<string>('0')
+interface Props {
+  value: number,
+  onChange(value: number): void,
+  onOk(): void
+}
+export const NumberPadSection: React.FC<Props> = ({value, onChange, onOk}) => {
+  // const [output, _setOutput] = useState<string>(value + '')
+  const output = value + ''
   const setOutput = (output: string) => {
     if (output.length > 16) {
-      output = output.slice(0, 16)
+      onChange(parseFloat(output.slice(0, 16)))
+      // FIXME 这里有bug, .的时候parse不出来
+    } else {
+      onChange(parseFloat(output))
     }
-    _setOutput(output)
   }
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const content = (e.target as HTMLButtonElement).textContent
@@ -105,7 +113,7 @@ export const NumberPadSection: React.FC = props => {
         setOutput('0')
         break
       case 'OK':
-        console.log('OK')
+        onOk()
         break
     }
   }

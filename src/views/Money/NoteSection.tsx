@@ -22,12 +22,20 @@ const StyledNoteSection = styled.section`
     }
   }
 `
-export const NoteSection: React.FC = props => {
-  const [note, setNote] = useState<string>('')
+
+interface Props {
+  value: string,
+  onChange(value: string): void
+}
+export const NoteSection: React.FC<Props> = ({value, onChange}) => {
+  // const [note, setNote] = useState<string>('')
+  const note = value
   const ref = useRef<HTMLInputElement>(null)
   const onBlur = () => {
     if (ref.current !== null) {
-      setNote(ref.current.value)
+      onChange(ref.current.value)
+      // FIXME 这里有bug, 非受控组件的问题吧
+      console.log(ref.current.value)
     }
   }
   return (

@@ -33,9 +33,15 @@ const StyledTagsSection = styled.section`
     color: #666;
   }
 `
-export const TagsSection: React.FC = props => {
+
+interface Props {
+  value: string[],
+  onChange(selected: string[]): void
+}
+export const TagsSection: React.FC<Props> = ({value, onChange}) => {
   const [tags, setTags] = useState<string[]>(['衣', '食', '住', '行'])
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  // const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const selectedTags = value
   const onAddTag = () => {
     const newTag = window.prompt('新标签的名称为')
     if (newTag !== null) {
@@ -44,9 +50,9 @@ export const TagsSection: React.FC = props => {
   }
   const onToggleTag = (tag: string) => {
     if (selectedTags.includes(tag)) {
-      setSelectedTags(selectedTags.filter(t => t !== tag))
+      onChange(selectedTags.filter(t => t !== tag))
     } else {
-      setSelectedTags([...selectedTags, tag])
+      onChange([...selectedTags, tag])
     }
   }
   return (
