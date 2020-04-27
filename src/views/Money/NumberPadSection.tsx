@@ -61,7 +61,13 @@ const StyledNumberPadSection = styled.section`
 `
 
 export const NumberPadSection: React.FC = props => {
-  const [output, setOutput] = useState<string>('0')
+  const [output, _setOutput] = useState<string>('0')
+  const setOutput = (output: string) => {
+    if (output.length > 16) {
+      output = output.slice(0, 16)
+    }
+    _setOutput(output)
+  }
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const content = (e.target as HTMLButtonElement).textContent
     if (content === null) {return}
@@ -82,11 +88,21 @@ export const NumberPadSection: React.FC = props => {
           setOutput(output + content)
         }
         break
+      case '.':
+        if (output.includes('.')) { break}
+        else {
+          setOutput(output + '.')
+        }
+        break
       case '删除':
-        console.log('删除')
+        if (output.length === 1) {
+          setOutput('0')
+        } else {
+          setOutput(output.slice(0, -1))
+        }
         break
       case '清空':
-        console.log('清空')
+        setOutput('0')
         break
       case 'OK':
         console.log('OK')
