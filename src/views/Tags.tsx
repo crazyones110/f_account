@@ -40,13 +40,13 @@ const Center = styled.div`
   margin-top: 48px;
 `
 export function Tags() {
-  const { tags, setTags } = useTags()
+  const { tags } = useTags()
   return (
     <Layout>
       <TagList>
-        {tags.map(tag => (
-          <li key={tag}>
-            <Link to={'/tags/' + tag}>
+        {(Object.entries(tags) as [string, string][]).map(([id, tag]) => (
+          <li key={id}>
+            <Link to={'/tags/' + id}>
               <span className="oneLine">{tag}</span>
               <RightIcon />
             </Link>

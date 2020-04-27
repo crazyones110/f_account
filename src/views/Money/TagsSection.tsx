@@ -36,34 +36,37 @@ const StyledTagsSection = styled.section`
 `
 
 interface Props {
-  value: string[],
+  value: string[]
   onChange(selected: string[]): void
 }
-export const TagsSection: React.FC<Props> = ({value, onChange}) => {
-  const {tags, setTags} = useTags()
+export const TagsSection: React.FC<Props> = ({ value, onChange }) => {
+  const { tags, setTags } = useTags()
   // const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const selectedTags = value
+  const selectedTagIds = value
   const onAddTag = () => {
     const newTag = window.prompt('新标签的名称为')
     if (newTag !== null) {
-      setTags([...tags, newTag])
+      setTags({
+        ...tags,
+        [Math.random()]: newTag,
+      })
     }
   }
-  const onToggleTag = (tag: string) => {
-    if (selectedTags.includes(tag)) {
-      onChange(selectedTags.filter(t => t !== tag))
+  const onToggleTag = (tagId: string) => {
+    if (selectedTagIds.includes(tagId)) {
+      onChange(selectedTagIds.filter(id => id !== tagId))
     } else {
-      onChange([...selectedTags, tag])
+      onChange([...selectedTagIds, tagId])
     }
   }
   return (
     <StyledTagsSection>
       <ol>
-        {tags.map(tag => (
+        {(Object.entries(tags) as [string, string][]).map(([id, tag]) => (
           <li
-            key={tag}
-            onClick={() => onToggleTag(tag)}
-            className={selectedTags.includes(tag) ? 'selected' : ''}
+            key={id}
+            onClick={() => onToggleTag(id)}
+            className={selectedTagIds.includes(id) ? 'selected' : ''}
           >
             {tag}
           </li>
