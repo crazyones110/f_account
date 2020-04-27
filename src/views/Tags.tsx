@@ -47,7 +47,7 @@ export function Tags() {
         {(Object.entries(tags) as [string, string][]).map(([id, tag]) => (
           <li key={id}>
             <Link to={'/tags/' + id}>
-              <span className="oneLine">{tag}</span>
+              <span className="oneLine">{id}:{tag}</span>
               <RightIcon />
             </Link>
           </li>

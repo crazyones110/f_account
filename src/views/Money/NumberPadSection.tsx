@@ -61,24 +61,47 @@ const StyledNumberPadSection = styled.section`
 `
 
 interface Props {
-  value: number,
-  onChange(value: number): void,
+  value: string
+  onChange(value: string): void
   onOk(): void
 }
-export const NumberPadSection: React.FC<Props> = ({value, onChange, onOk}) => {
+export const NumberPadSection: React.FC<Props> = ({
+  value,
+  onChange,
+  onOk,
+}) => {
   // const [output, _setOutput] = useState<string>(value + '')
   const output = value + ''
   const setOutput = (output: string) => {
     if (output.length > 16) {
-      onChange(parseFloat(output.slice(0, 16)))
+      onChange(output.slice(0, 16))
       // FIXME 这里有bug, .的时候parse不出来
     } else {
-      onChange(parseFloat(output))
+      onChange(output)
     }
   }
   const onClickButtonWrapper = (e: React.MouseEvent) => {
-    const content = (e.target as HTMLButtonElement).textContent
-    if (content === null) {return}
+    const contentList = [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '0',
+      '.',
+      '删除',
+      '清空',
+      'OK',
+    ] as const
+    type ContentType = typeof contentList[number]
+    const content = (e.target as HTMLButtonElement).textContent as ContentType | null
+    if (content === null) {
+      return
+    }
     switch (content) {
       case '0':
       case '1':
@@ -97,8 +120,9 @@ export const NumberPadSection: React.FC<Props> = ({value, onChange, onOk}) => {
         }
         break
       case '.':
-        if (output.includes('.')) { break}
-        else {
+        if (output.includes('.')) {
+          break
+        } else {
           setOutput(output + '.')
         }
         break

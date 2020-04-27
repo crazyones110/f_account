@@ -17,63 +17,36 @@ export function Money() {
     tagIds: [] as string[],
     note: '',
     category: '-' as Category,
-    amount: 0,
+    amount: '0',
   })
-  // const onChange = (key, value) => {
-  //   setSelected({
-  //     ...selected,
-  //     key: value
-  //   })
-  // }
-  // TODO 下面的onChange记得重构
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({
       ...selected,
-      ...obj
+      ...obj,
     })
   }
   return (
     <MoneyLayout className="hi">
-      {selected.tagIds} <br/>
-      {selected.note} <br/>
-      {selected.category} <br/>
-      {selected.amount} <br/>
+      {selected.tagIds.join(',')} <br />
+      {selected.note} <br />
+      {selected.category} <br />
+      {selected.amount} <br />
       <TagsSection
         value={selected.tagIds}
-        onChange={tagIds =>
-          setSelected({
-            ...selected,
-            tagIds,
-          })
-        }
+        onChange={tagIds => onChange({ tagIds })}
       />
       <NoteSection
         value={selected.note}
-        onChange={note =>
-          setSelected({
-            ...selected,
-            note,
-          })
-        }
+        onChange={note => onChange({ note })}
       />
       <CategorySection
         value={selected.category}
-        onChange={category =>
-          setSelected({
-            ...selected,
-            category,
-          })
-        }
+        onChange={category => onChange({ category })}
       />
       <NumberPadSection
         value={selected.amount}
-        onChange={amount =>
-          setSelected({
-            ...selected,
-            amount,
-          })
-        }
-        onOk={()=>{}}
+        onChange={amount => onChange({ amount })}
+        onOk={() => {}}
       />
     </MoneyLayout>
   )

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import React, { useState } from 'react'
 import { useTags } from 'views/useTags'
+import { createId } from 'utils/createId'
 
 const StyledTagsSection = styled.section`
   background: #fff;
@@ -48,7 +49,8 @@ export const TagsSection: React.FC<Props> = ({ value, onChange }) => {
     if (newTag !== null) {
       setTags({
         ...tags,
-        [Math.random()]: newTag,
+        // FIXME 这里应该还会有bug,因为defaultTags并没有改
+        [createId()]: newTag,
       })
     }
   }

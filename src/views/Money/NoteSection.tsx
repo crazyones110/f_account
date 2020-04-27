@@ -28,14 +28,13 @@ interface Props {
   onChange(value: string): void
 }
 export const NoteSection: React.FC<Props> = ({value, onChange}) => {
-  // const [note, setNote] = useState<string>('')
+  // const [note, setNote] = useState<string>(value)
   const note = value
-  const ref = useRef<HTMLInputElement>(null)
+  const refInput = useRef<HTMLInputElement>(null)
   const onBlur = () => {
-    if (ref.current !== null) {
-      onChange(ref.current.value)
-      // FIXME 这里有bug, 非受控组件的问题吧
-      console.log(ref.current.value)
+    if (refInput.current !== null) {
+      onChange(refInput.current.value)
+      refInput.current.value = ''
     }
   }
   return (
@@ -47,6 +46,7 @@ export const NoteSection: React.FC<Props> = ({value, onChange}) => {
           placeholder="在这里添加备注"
           defaultValue={note}
           onBlur={onBlur}
+          ref={refInput}
         />
       </label>
     </StyledNoteSection>
