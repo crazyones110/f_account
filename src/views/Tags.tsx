@@ -1,12 +1,56 @@
 import { Layout } from 'components/Layout'
 import React from 'react'
 import { useTags } from './useTags'
+import styled from 'styled-components'
+import { ReactComponent as Right } from 'icons/right.svg'
 
+const RightIcon = styled(Right)`
+  width: 1em;
+  height: 1em;
+`
+
+const TagList = styled.ul`
+  font-size: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  > li {
+    /* #e5e5e5 */
+    border-bottom: 1px solid #d5d5d9;
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+`
+const AddTagButton = styled.button`
+  font-size: 18px;
+  border: none;
+  padding: 8px 12px;
+  background: #767676;
+  color: #fff;
+  border-radius: 4px;
+`
+const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+`
 export function Tags() {
-  const {tags, setTags} = useTags()
+  const { tags, setTags } = useTags()
   return (
     <Layout>
-      <h2>标签页</h2>
+      <TagList>
+        {tags.map(tag => (
+          <li key={tag}>
+            <span className="oneLine">{tag}</span>
+            <RightIcon />
+          </li>
+        ))}
+      </TagList>
+      <Center>
+        <AddTagButton>新增标签</AddTagButton>
+      </Center>
     </Layout>
   )
 }
