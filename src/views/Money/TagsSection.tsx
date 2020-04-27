@@ -12,16 +12,15 @@ const StyledTagsSection = styled.section`
   justify-content: flex-end;
   align-items: flex-start;
   ol {
+    margin-left: -12px;
     > li {
       background: #d9d9d9;
       border-radius: 18px;
       display: inline-block;
       padding: 4px 18px;
       font-size: 14px;
+      /* margin: 8px 24px 8px 0; */
       margin: 8px 12px;
-      &:first-child {
-        margin-left: 0;
-      }
       &.selected {
         background: #f60;
       }
